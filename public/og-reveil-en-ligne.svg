@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+	<rect width="1200" height="630" fill="#f3f3f3"/>
+	<rect x="64" y="64" width="1072" height="502" rx="36" fill="#fff"/>
+	<rect x="112" y="112" width="58" height="58" rx="18" fill="#141414"/>
+	<circle cx="141" cy="142" r="17" fill="none" stroke="#fff" stroke-width="3"/>
+	<path d="M141 131v11l7 4M127 121l-5 5m33-5 5 5" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+	<text x="190" y="151" fill="#141414" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600">réveil en ligne</text>
+	<text x="112" y="315" fill="#141414" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">Réveil en ligne gratuit</text>
+	<text x="112" y="390" fill="#707070" font-family="Arial, Helvetica, sans-serif" font-size="36">Choisissez une heure, une musique,</text>
+	<text x="112" y="438" fill="#707070" font-family="Arial, Helvetica, sans-serif" font-size="36">et gardez la page ouverte.</text>
+	<rect x="112" y="474" width="246" height="56" rx="28" fill="#141414"/>
+	<text x="145" y="511" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600">Sans installation</text>
+</svg>
