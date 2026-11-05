@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local Tailwind documentation references
+.agents/skills/tailwind-4-docs/references/docs/*.mdx
