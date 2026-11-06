@@ -9,13 +9,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "npm run build && wrangler pages deploy ./dist --project-name=reveilenligne-com"
   },
   "dependencies": {
     "astro": "^7.4.5"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.4",
-    "tailwindcss": "^4.3.4"
+    "tailwindcss": "^4.3.4",
+    "wrangler": "^4.158.0"
   }
 }
