@@ -49,6 +49,8 @@ const snoozeLabel = document.querySelector<HTMLElement>('#snooze-label');
 const recentTimesSection = document.querySelector<HTMLElement>('#recent-times');
 const recentTimesList = document.querySelector<HTMLElement>('#recent-times-list');
 const alarmCard = document.querySelector<HTMLElement>('.alarm-card');
+const themeToggle = document.querySelector<HTMLButtonElement>('#theme-toggle');
+const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
 
 let targetTime: number | null = null;
 let countdownInterval: number | undefined;
@@ -59,6 +61,14 @@ let recentTimes: string[] = [];
 let selectedSound = '';
 let customAudioUrl: string | null = null;
 let databasePromise: Promise<IDBDatabase> | null = null;
+
+function updateThemeToggle() {
+	const enabled = document.documentElement.dataset.theme === 'dark';
+	themeToggle?.setAttribute('aria-pressed', String(enabled));
+	themeToggle?.setAttribute('aria-label', enabled ? 'Activer le mode clair' : 'Activer le mode sombre');
+	themeToggle?.setAttribute('title', enabled ? 'Activer le mode clair' : 'Activer le mode sombre');
+	if (themeColor) themeColor.content = enabled ? '#111214' : '#ffffff';
+}
 
 function setStatus(message: string) {
 	statusMessage?.replaceChildren(document.createTextNode(message));
@@ -523,6 +533,35 @@ document.querySelector<HTMLButtonElement>('#night-toggle')?.addEventListener('cl
 	alarmCard?.classList.toggle('night-display', enabled);
 });
 
+themeToggle?.addEventListener('click', () => {
+	const enabled = document.documentElement.dataset.theme !== 'dark';
+	const root = document.documentElement;
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const applyTheme = () => {
+		root.dataset.theme = enabled ? 'dark' : 'light';
+		updateThemeToggle();
+	};
+
+	if (!prefersReducedMotion && document.startViewTransition) {
+		const bounds = themeToggle.getBoundingClientRect();
+		root.style.setProperty('--theme-x', `${bounds.left + bounds.width / 2}px`);
+		root.style.setProperty('--theme-y', `${bounds.top + bounds.height / 2}px`);
+		document.startViewTransition(applyTheme);
+	} else if (!prefersReducedMotion) {
+		root.classList.add('theme-transitioning');
+		applyTheme();
+		window.setTimeout(() => root.classList.remove('theme-transitioning'), 450);
+	} else {
+		applyTheme();
+	}
+
+	try {
+		localStorage.setItem('reveil-en-ligne-theme', enabled ? 'dark' : 'light');
+	} catch (error) {
+		console.warn('Impossible d’enregistrer le thème choisi.', error);
+	}
+});
+
 volumeInput?.addEventListener('input', () => {
 	updateVolumeOutput();
 	if (alarmAudio) alarmAudio.volume = Number(volumeInput.value) / 100;
@@ -536,6 +575,7 @@ snoozeInput?.addEventListener('change', () => {
 timeInput?.addEventListener('change', savePreferences);
 
 updateClock();
+updateThemeToggle();
 window.setInterval(updateClock, 1000);
 writeTimeToInput(new Date(Date.now() + 30 * 60_000));
 loadBundledSounds();

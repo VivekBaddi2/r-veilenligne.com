@@ -35,6 +35,15 @@ const applicationJsonLd = {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script is:inline>
+			try {
+				if (localStorage.getItem('reveil-en-ligne-theme') === 'dark') {
+					document.documentElement.dataset.theme = 'dark';
+				}
+			} catch (error) {
+				console.warn('Impossible de charger le thème enregistré.', error);
+			}
+		</script>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="canonical" href={canonicalUrl} />

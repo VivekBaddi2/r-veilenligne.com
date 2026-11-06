@@ -1,10 +1,76 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+
+const faqs = [
+	{
+		question: 'Comment utiliser le réveil en ligne ?',
+		answer:
+			'Choisissez une heure, sélectionnez un son intégré ou importez votre musique, réglez le volume puis cliquez sur « Démarrer le réveil ». Testez la sonnerie et gardez cette page ouverte jusqu’au déclenchement.',
+	},
+	{
+		question: 'Est-ce que l’alarme de ce réveil est forte ?',
+		answer:
+			'Le volume dépend du son choisi, du réglage du réveil et du volume de votre appareil. Ajustez les deux volumes et appuyez sur « Écouter » pour tester la sonnerie avant de compter sur l’alarme.',
+	},
+	{
+		question: 'Ai-je besoin d’une connexion Internet ?',
+		answer:
+			'Une connexion est nécessaire pour ouvrir et charger la page. Une fois celle-ci chargée, le compte à rebours fonctionne dans votre navigateur sans connexion active, tant que vous ne rechargez pas la page et que l’onglet reste ouvert.',
+	},
+	{
+		question: 'Le réveil fonctionne-t-il si je ferme l’onglet ?',
+		answer:
+			'Non. Le compte à rebours s’arrête si vous fermez l’onglet ou le navigateur. Gardez cette page ouverte jusqu’à ce que le réveil sonne.',
+	},
+	{
+		question: 'Le réveil fonctionne-t-il si l’ordinateur est en veille ?',
+		answer:
+			'La mise en veille peut interrompre le compte à rebours et empêcher la sonnerie. Gardez l’ordinateur éveillé ; le maintien de l’écran éveillé dépend du navigateur et de l’appareil et n’est pas toujours disponible.',
+	},
+	{
+		question: 'Puis-je programmer plusieurs alarmes ?',
+		answer:
+			'Chaque onglet ouvert peut avoir son propre réveil. Ouvrez la page dans plusieurs onglets et réglez-les séparément, en gardant chaque onglet et votre appareil actifs jusqu’à l’heure prévue.',
+	},
+	{
+		question: 'Est-ce que cela fonctionne sur mobile ?',
+		answer:
+			'Oui, vous pouvez utiliser ce réveil dans un navigateur mobile moderne. Les restrictions d’activité en arrière-plan et la mise en veille varient selon le téléphone et le navigateur : gardez la page ouverte et l’appareil éveillé.',
+	},
+	{
+		question: 'Pourquoi n’y a-t-il aucun son ?',
+		answer:
+			'Vérifiez qu’un son est sélectionné, que le volume du réveil et celui de votre appareil sont activés, et que le mode silencieux ou un casque connecté ne bloque pas la lecture. Appuyez sur « Écouter » pour tester le son ; certains navigateurs exigent une interaction avant d’autoriser l’audio.',
+	},
+	{
+		question: 'L’alarme sonnera-t-elle si je change d’onglet ?',
+		answer:
+			'En général, le compte à rebours continue si vous consultez un autre onglet, mais certains navigateurs ou appareils limitent l’activité en arrière-plan. Ne fermez pas l’onglet et évitez la mise en veille pour réduire le risque que l’alarme soit retardée ou interrompue.',
+	},
+	{
+		question: 'Mes réglages sont-ils envoyés sur internet ?',
+		answer:
+			'Non. L’alarme fonctionne dans votre navigateur et les préférences enregistrées restent sur cet appareil. Cette page ne nécessite pas de compte.',
+	},
+];
+
+const faqJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map(({ question, answer }) => ({
+		'@type': 'Question',
+		name: question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: answer,
+		},
+	})),
+};
 ---
 
 <Layout>
-	<header class="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-5 sm:px-8">
+	<header class="mx-auto flex w-full max-w-6xl items-center justify-between gap-2 px-4 py-5 sm:gap-4 sm:px-8">
 		<a class="flex items-center gap-3 font-semibold tracking-tight text-ink" href="#accueil" aria-label="Réveil en ligne, accueil">
 			<span class="brand-mark" aria-hidden="true">
 				<svg viewBox="0 0 32 32" fill="none">
@@ -19,7 +85,21 @@ import '../styles/global.css';
 			<a class="transition-colors hover:text-ink" href="#guide">Le guide</a>
 			<a class="transition-colors hover:text-ink" href="#questions">Questions fréquentes</a>
 		</nav>
-		<a class="button button-dark px-5" href="#reveil">Régler mon réveil</a>
+		<div class="flex shrink-0 items-center gap-2">
+			<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Activer le mode sombre" aria-pressed="false" title="Activer le mode sombre">
+				<svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+					<path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
+				</svg>
+				<svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+					<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+					<path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
+				</svg>
+			</button>
+			<a class="button button-dark header-cta px-3 sm:px-5" href="#reveil">
+				<span class="hidden sm:inline">Régler mon réveil</span>
+				<span class="sm:hidden">Régler</span>
+			</a>
+		</div>
 	</header>
 
 	<main id="accueil">
@@ -34,7 +114,7 @@ import '../styles/global.css';
 		</section>
 
 		<section id="reveil" aria-labelledby="alarm-title" class="mx-auto max-w-4xl scroll-mt-8 px-4 sm:px-8">
-			<div class="alarm-card rounded-3xl border border-hairline-soft bg-white p-5 sm:p-8 lg:p-10">
+			<div class="alarm-card rounded-3xl border border-hairline-soft bg-surface p-5 sm:p-8 lg:p-10">
 				<div class="flex flex-col items-center text-center">
 					<div class="flex items-center gap-2 text-sm font-medium text-muted">
 						<span class="live-dot" aria-hidden="true"></span>
@@ -91,7 +171,7 @@ import '../styles/global.css';
 						</div>
 						<div>
 							<label class="mb-2 block text-sm font-semibold text-ink" for="alarm-file">Ou choisissez votre musique</label>
-							<input class="field-input file-input w-full cursor-pointer text-sm file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-white file:px-3 file:py-1 file:text-xs file:font-semibold file:text-ink" id="alarm-file" name="alarm-file" type="file" accept="audio/*" />
+							<input class="field-input file-input w-full cursor-pointer text-sm file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-surface file:px-3 file:py-1 file:text-xs file:font-semibold file:text-ink" id="alarm-file" name="alarm-file" type="file" accept="audio/*" />
 							<p id="selected-file" class="mt-2 truncate text-xs text-muted">Aucun fichier personnel sélectionné.</p>
 						</div>
 						<div class="sm:col-span-2">
@@ -242,31 +322,18 @@ import '../styles/global.css';
 		</section>
 
 		<section id="questions" class="mx-auto max-w-3xl scroll-mt-10 px-5 pb-24 sm:px-8">
+			<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 			<div class="text-center">
 				<p class="eyebrow mb-4">Questions fréquentes</p>
 				<h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Tout savoir avant de vous coucher.</h2>
 			</div>
 			<div class="mt-8 space-y-3">
-				<details class="faq-row">
-					<summary>Le réveil sonnera-t-il si je ferme cette page ?</summary>
-					<p>Non. Gardez cette page ouverte dans votre navigateur jusqu’à ce que le réveil sonne. Si vous fermez l’onglet ou le navigateur, le compte à rebours s’arrête.</p>
-				</details>
-				<details class="faq-row">
-					<summary>Le réveil fonctionne-t-il si mon appareil se met en veille ?</summary>
-					<p>La mise en veille peut interrompre le compte à rebours et empêcher la sonnerie. L’option de maintien de l’écran éveillé dépend du navigateur et de l’appareil ; elle n’est pas toujours disponible.</p>
-				</details>
-				<details class="faq-row">
-					<summary>Pourquoi est-ce que je n’entends rien ?</summary>
-					<p>Les navigateurs peuvent bloquer le son avant votre première interaction. Appuyez sur « Écouter » pour tester la sonnerie, puis vérifiez le volume de votre appareil et celui du réveil.</p>
-				</details>
-				<details class="faq-row">
-					<summary>Mes réglages sont-ils envoyés sur internet ?</summary>
-					<p>Non. L’alarme fonctionne dans votre navigateur et les préférences enregistrées restent sur cet appareil. Cette page ne nécessite pas de compte.</p>
-				</details>
-				<details class="faq-row">
-					<summary>Puis-je régler plusieurs réveils ?</summary>
-					<p>Chaque onglet ouvert peut avoir son propre réveil. Gardez chaque onglet et votre appareil actifs jusqu’à l’heure prévue.</p>
-				</details>
+				{faqs.map((faq) => (
+					<details class="faq-row">
+						<summary>{faq.question}</summary>
+						<p>{faq.answer}</p>
+					</details>
+				))}
 			</div>
 		</section>
 	</main>
