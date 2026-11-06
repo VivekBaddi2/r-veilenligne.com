@@ -87,7 +87,7 @@ function updateClock() {
 			hour: '2-digit',
 			minute: '2-digit',
 			second: '2-digit',
-		}).format(now);
+		}).format(now).replace(/:/g, ':');
 	}
 
 	if (date) {
@@ -260,6 +260,7 @@ function updateVolumeOutput() {
 	if (volumeOutput && volumeInput) {
 		volumeOutput.value = `${volumeInput.value} %`;
 		volumeOutput.textContent = `${volumeInput.value} %`;
+		volumeInput.style.setProperty('--volume-progress', `${volumeInput.value}%`);
 	}
 }
 
