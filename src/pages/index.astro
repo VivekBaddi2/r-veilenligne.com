@@ -341,7 +341,7 @@ const faqJsonLd = {
 	<footer class="footer-band mx-auto max-w-6xl px-6 py-10 sm:px-10">
 		<div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
 			<div>
-				<a class="inline-flex items-center gap-3 text-lg font-semibold tracking-tight text-white" href="#accueil">
+				<a class="inline-flex items-center gap-3 text-lg font-semibold tracking-tight text-white" href="/#accueil">
 					<span class="brand-mark brand-mark-inverse" aria-hidden="true">
 						<svg viewBox="0 0 32 32" fill="none">
 							<circle cx="16" cy="17" r="11" stroke="currentColor" stroke-width="2" />
@@ -354,8 +354,13 @@ const faqJsonLd = {
 			</div>
 			<a class="text-sm text-white/70 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white" href="#questions">Consulter les questions fréquentes</a>
 		</div>
-		<div class="mt-8 border-t border-white/15 pt-5 text-xs text-white/50">
+		<div class="mt-8 flex flex-col gap-5 border-t border-white/15 pt-5 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
 			<p>Un réveil gratuit, sans compte et sans collecte de vos réglages.</p>
+			<nav aria-label="Informations légales" class="flex flex-wrap gap-x-5 gap-y-2">
+				<a class="transition-colors hover:text-white" href="/conditions-utilisation/">Conditions d’utilisation</a>
+				<a class="transition-colors hover:text-white" href="/politique-confidentialite/">Confidentialité</a>
+				<a class="transition-colors hover:text-white" href="/contact/">Contact</a>
+			</nav>
 		</div>
 	</footer>
 

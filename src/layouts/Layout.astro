@@ -4,17 +4,23 @@ if (!siteUrl) {
 	throw new Error('Set the production site URL in astro.config.mjs.');
 }
 
-const canonicalUrl = new URL('/', siteUrl).href;
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Réveil en ligne gratuit avec musique | Alarme en ligne',
+	description = 'Utilisez ce réveil en ligne gratuit : réglez une alarme, choisissez ou importez une musique, testez le son et gardez l’onglet ouvert.',
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const socialImageUrl = new URL('/og-reveil-en-ligne.png', siteUrl).href;
-const pageTitle = 'Réveil en ligne gratuit avec musique | Alarme en ligne';
-const pageDescription =
-	'Utilisez ce réveil en ligne gratuit : réglez une alarme, choisissez ou importez une musique, testez le son et gardez l’onglet ouvert.';
 const applicationJsonLd = {
 	'@context': 'https://schema.org',
 	'@type': 'WebApplication',
 	name: 'Réveil en ligne',
-	url: canonicalUrl,
-	description: pageDescription,
+	url: new URL('/', siteUrl).href,
+	description,
 	applicationCategory: 'UtilitiesApplication',
 	operatingSystem: 'Any',
 	inLanguage: 'fr-FR',
@@ -48,23 +54,23 @@ const applicationJsonLd = {
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#ffffff" />
-		<meta name="description" content={pageDescription} />
+		<meta name="description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="fr_FR" />
 		<meta property="og:site_name" content="Réveil en ligne" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:image" content={socialImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="Réveil en ligne gratuit avec affichage de l’heure et une alarme personnalisable" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={socialImageUrl} />
-		<script type="application/ld+json" set:html={JSON.stringify(applicationJsonLd)} />
-		<title>{pageTitle}</title>
+		{Astro.url.pathname === '/' && <script type="application/ld+json" set:html={JSON.stringify(applicationJsonLd)} />}
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />

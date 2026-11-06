@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Layout title={`${title} | Réveil en ligne`} description={description}>
+	<div class="legal-page">
+		<header class="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
+			<a class="flex items-center gap-3 font-semibold tracking-tight text-ink" href="/" aria-label="Réveil en ligne, accueil">
+				<span class="brand-mark" aria-hidden="true">
+					<svg viewBox="0 0 32 32" fill="none">
+						<circle cx="16" cy="17" r="11" stroke="currentColor" stroke-width="2" />
+						<path d="M16 10v7l4 2M8 4 5 7m19-3 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+					</svg>
+				</span>
+				<span>réveil en ligne</span>
+			</a>
+			<a class="text-sm font-medium text-muted underline decoration-hairline underline-offset-4 transition-colors hover:text-ink" href="/">
+				Retour à l’accueil
+			</a>
+		</header>
+
+		<main class="mx-auto max-w-3xl px-5 pb-20 pt-10 sm:px-8 sm:pt-16">
+			<p class="eyebrow mb-4">Informations</p>
+			<h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">{title}</h1>
+			<p class="mt-4 text-sm text-muted">Dernière mise à jour : 6 novembre 2026</p>
+			<div class="legal-copy mt-10">
+				<slot />
+			</div>
+		</main>
+
+		<footer class="mx-auto flex max-w-5xl flex-col gap-4 border-t border-hairline px-5 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
+			<a class="transition-colors hover:text-ink" href="/">Réveil en ligne</a>
+			<nav aria-label="Informations légales" class="flex flex-wrap gap-x-5 gap-y-2">
+				<a class="transition-colors hover:text-ink" href="/conditions-utilisation/">Conditions d’utilisation</a>
+				<a class="transition-colors hover:text-ink" href="/politique-confidentialite/">Confidentialité</a>
+				<a class="transition-colors hover:text-ink" href="/contact/">Contact</a>
+			</nav>
+		</footer>
+	</div>
+</Layout>

@@ -3,6 +3,7 @@
 @source "../pages";
 @source "../layouts";
 @source "../scripts";
+@source "../components";
 
 @theme {
 	--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -399,6 +400,49 @@ summary:focus-visible {
 .footer-band {
 	border-radius: 24px 24px 0 0;
 	background: #141414;
+}
+
+.legal-page {
+	min-height: 100vh;
+}
+
+.legal-copy {
+	color: var(--muted);
+	font-size: 15px;
+	line-height: 1.75;
+}
+
+.legal-copy h2 {
+	margin: 2rem 0 0.75rem;
+	color: var(--ink);
+	font-size: 1.25rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.35;
+}
+
+.legal-copy p,
+.legal-copy ul {
+	margin: 0.75rem 0;
+}
+
+.legal-copy ul {
+	padding-left: 1.4rem;
+}
+
+.legal-copy li + li {
+	margin-top: 0.35rem;
+}
+
+.legal-copy a {
+	color: var(--ink);
+	text-decoration: underline;
+	text-decoration-color: var(--muted);
+	text-underline-offset: 3px;
+}
+
+.legal-copy a:hover {
+	text-decoration-color: currentColor;
 }
 
 .feature-card,
