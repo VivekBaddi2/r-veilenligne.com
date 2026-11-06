@@ -41,6 +41,12 @@ const applicationJsonLd = {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script async is:inline src="https://www.googletagmanager.com/gtm.js?id=GTM-5FQKHTQV"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){window.dataLayer.push(arguments);}
+			gtag('js', new Date());
+		</script>
 		<script is:inline>
 			try {
 				if (localStorage.getItem('reveil-en-ligne-theme') === 'dark') {
